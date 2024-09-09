@@ -1,9 +1,12 @@
 import "./App.css";
+import Body from "./components/Body";
+import Header from "./components/Header";
 
 function App() {
   return (
-    <div>
-      <h1 className="font-bold underline text-center">Welcome to Foodbazaar</h1>
+    <div className="app">
+      <Header />
+      <Body />
     </div>
   );
 }
