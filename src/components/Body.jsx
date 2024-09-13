@@ -15,6 +15,7 @@ const Body = () => {
   }, []);
 
   const fetchData = async () => {
+    // Fetching data from swiggy from title= Top restaurant chains in Bangalore
     const data = await fetch(
       "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.960059122809971&lng=77.57337538383284&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
@@ -65,7 +66,7 @@ const Body = () => {
             const filteredList = listOfRestaurants.filter(
               (res) => res.info.avgRating > 4.5
             );
-            setListOfRestaurants(filteredList);
+            setFilteredRestaurant(filteredList);
           }}
         >
           <h3 className="text-lg font-semibold">
@@ -74,6 +75,7 @@ const Body = () => {
         </button>
       </div>
 
+      {/* Restaurants container */}
       <div className="res-container">
         {filteredRestaurant.map((restaurant) => (
           <RestaurantCard key={restaurant.info.id} resData={restaurant} />
