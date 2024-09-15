@@ -5,17 +5,23 @@ import Header from "./components/Header";
 import { About } from "./components/About";
 import { Contact } from "./components/Contact";
 import Cart from "./components/Cart";
+import Footer from "./components/Footer";
+import Error from "./components/Error";
 
 function App() {
   return (
-    <div className="app">
+    <div className="app flex flex-col min-h-screen">
       <Header />
-      <Routes>
-        <Route path="/" element={<Body />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/cart" element={<Cart />} />
-      </Routes>
+      <main className="flex-1">
+        <Routes>
+          <Route path="/" element={<Body />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="*" element={<Error />} />
+        </Routes>
+      </main>
+      <Footer />
     </div>
   );
 }
