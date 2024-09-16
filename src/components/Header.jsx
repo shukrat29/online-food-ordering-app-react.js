@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Header = () => {
   const [btnName, setBtnName] = useState("Login");
   return (
-    <div className="header">
+    <div className="header sticky top-0 z-50 bg-white shadow-md">
       <div className="logo-container flex">
         <Link to="/">
           <img
