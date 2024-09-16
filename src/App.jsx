@@ -7,6 +7,7 @@ import { Contact } from "./components/Contact";
 import Cart from "./components/Cart";
 import Footer from "./components/Footer";
 import Error from "./components/Error";
+import RestaurantMenu from "./components/RestaurantMenu";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/restaurants/:resId" element={<RestaurantMenu />} />
           <Route path="*" element={<Error />} />
         </Routes>
       </main>
