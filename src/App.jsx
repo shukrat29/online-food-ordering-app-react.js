@@ -8,6 +8,10 @@ import Cart from "./components/Cart";
 import Footer from "./components/Footer";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
+// import Grocery from "./components/Grocery";
+import { lazy, Suspense } from "react";
+
+const Grocery = lazy(() => import("./components/Grocery"));
 
 function App() {
   return (
@@ -18,6 +22,14 @@ function App() {
           <Route path="/" element={<Body />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route
+            path="/grocery"
+            element={
+              <Suspense fallback={<h1>Loading...</h1>}>
+                <Grocery />
+              </Suspense>
+            }
+          />
           <Route path="/cart" element={<Cart />} />
           <Route path="/restaurants/:resId" element={<RestaurantMenu />} />
           <Route path="*" element={<Error />} />
