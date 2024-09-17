@@ -1,8 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
+import { FaRegCircle } from "react-icons/fa";
 
 const Header = () => {
   const [btnName, setBtnName] = useState("Login");
+
+  const onlineStatus = useOnlineStatus();
+
   return (
     <div className="header sticky top-0 z-50 bg-white shadow-md">
       <div className="logo-container flex">
@@ -19,6 +24,11 @@ const Header = () => {
       </div>
       <div className="nav-items">
         <ul>
+          <li>
+            Online Status:
+            {onlineStatus ? "Online" : "Offline"}
+          </li>
+
           <li>
             <Link to="/">Home</Link>
           </li>

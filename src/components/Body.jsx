@@ -1,4 +1,5 @@
 import RestaurantCard from "./RestaurantCard";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 // import { resList } from "../utils/mockData";
 import { useEffect, useState } from "react";
@@ -31,8 +32,12 @@ const Body = () => {
       json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants
     );
   };
-  // Conditional Rendering
 
+  const onlineStatus = useOnlineStatus();
+  if (onlineStatus == false)
+    return <h1>Please check your internet connection</h1>;
+
+  // Conditional Rendering
   return listOfRestaurants.length == 0 ? (
     <Shimmer />
   ) : (
