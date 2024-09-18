@@ -1,5 +1,6 @@
 import RestaurantCard from "./RestaurantCard";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import RestaurantsInBangalore from "./RestaurantsInBangalore";
 
 // import { resList } from "../utils/mockData";
 import { useEffect, useState } from "react";
@@ -22,6 +23,7 @@ const Body = () => {
       "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.960059122809971&lng=77.57337538383284&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
+    console.log(json);
 
     // Optional Chaining
 
@@ -96,6 +98,10 @@ const Body = () => {
           </Link>
         ))}
       </div>
+      <h1 className="font-bold mt-4 mb-1 size-3">
+        Restaurants with online food delivery in Bangalore
+      </h1>
+      <RestaurantsInBangalore />
     </>
   );
 };
