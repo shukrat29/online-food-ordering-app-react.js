@@ -1,4 +1,4 @@
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { RestaurantCardWithVegLabel } from "./RestaurantCard";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import RestaurantsInBangalore from "./RestaurantsInBangalore";
 
@@ -12,6 +12,12 @@ const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);
   const [searchText, setSearchText] = useState("");
+
+  const UpdatedRestaurantCardWithVegLabel =
+    RestaurantCardWithVegLabel(RestaurantCard);
+
+  console.log(listOfRestaurants);
+  console.log(filteredRestaurant);
 
   useEffect(() => {
     fetchData();
@@ -94,7 +100,14 @@ const Body = () => {
             key={restaurant.info.id}
             to={"/restaurants/" + restaurant.info.id}
           >
-            <RestaurantCard resData={restaurant} />
+            {/* if the restaurant is veg then add a veg lebel to it.
+            using higher order component feature of react */}
+
+            {restaurant.info.veg ? (
+              <UpdatedRestaurantCardWithVegLabel resData={restaurant} />
+            ) : (
+              <RestaurantCard resData={restaurant} />
+            )}
           </Link>
         ))}
       </div>

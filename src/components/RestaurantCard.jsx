@@ -26,4 +26,21 @@ const RestaurantCard = (props) => {
   );
 };
 
+// Higher Order Component
+// input- RestaurantCard and return RestaurantCardWithVegLabel
+// it does not change/modify anything of Original RestaurantCard it only adds or enhance
+
+export const RestaurantCardWithVegLabel = (RestaurantCard) => {
+  return (props) => {
+    return (
+      <div>
+        <label className="absolute bg-black text-white m-1 p-1 rounded-lg">
+          Veg Restaurant
+        </label>
+        <RestaurantCard {...props} />
+      </div>
+    );
+  };
+};
+
 export default RestaurantCard;
