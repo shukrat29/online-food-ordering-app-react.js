@@ -1,6 +1,6 @@
 import RestaurantCard, { RestaurantCardWithVegLabel } from "./RestaurantCard";
 import useOnlineStatus from "../utils/useOnlineStatus";
-import RestaurantsInBangalore from "./RestaurantsInBangalore";
+// import RestaurantsInBangalore from "./RestaurantsInBangalore";
 
 // import { resList } from "../utils/mockData";
 import { useEffect, useState } from "react";
@@ -16,8 +16,8 @@ const Body = () => {
   const UpdatedRestaurantCardWithVegLabel =
     RestaurantCardWithVegLabel(RestaurantCard);
 
-  console.log(listOfRestaurants);
-  console.log(filteredRestaurant);
+  // console.log(listOfRestaurants);
+  // console.log(filteredRestaurant);
 
   useEffect(() => {
     fetchData();
@@ -36,6 +36,7 @@ const Body = () => {
     setListOfRestaurants(
       json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants
     );
+
     setFilteredRestaurant(
       json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants
     );
@@ -111,10 +112,10 @@ const Body = () => {
           </Link>
         ))}
       </div>
-      <h1 className="font-bold mt-4 mb-1 size-3">
+      {/* <h1 className="font-bold mt-4 mb-1 size-3">
         Restaurants with online food delivery in Bangalore
       </h1>
-      <RestaurantsInBangalore />
+      <RestaurantsInBangalore /> */}
     </>
   );
 };

@@ -3,6 +3,7 @@ import Shimmer from "./Shimmer";
 import { FaChevronDown } from "react-icons/fa6";
 import { useParams } from "react-router-dom";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
+import RestaurantCategory from "./RestaurantCategory";
 
 const RestaurantMenu = () => {
   // const [resInfo, setResInfo] = useState(null);
@@ -12,7 +13,7 @@ const RestaurantMenu = () => {
   //   In the example below, each restaurant's id is being extracted.
   const { resId } = useParams();
 
-  // Custom hooks
+  // Custom Hooks
   const resInfo = useRestaurantMenu(resId);
 
   // useEffect(() => {
@@ -39,26 +40,30 @@ const RestaurantMenu = () => {
   // title- Recommended
   const { itemCards } =
     resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card;
-  // console.log(itemCards);
+  console.log(resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards);
+  // Categories
+  const categories =
+    resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.filter(
+      (c) =>
+        c.card.card?.["@type"] ===
+        "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+    );
 
   return (
-    <div className="menu">
+    <div className="menu text-center">
       <h1 className="font-semibold">{name}</h1>
-      <h3>
+      <p>
         {cuisines.join(",")} - {costForTwoMessage}
-      </h3>
+      </p>
 
-      <h2 className="font-bold flex items-center">
-        Menu <FaChevronDown />
-      </h2>
-      <ul>
-        {itemCards.map((item) => (
-          <li key={item.card.info.id}>
-            {item.card.info.name} - ₹
-            {item.card.info.price / 100 || item.card.info.defaultPrice / 100}
-          </li>
-        ))}
-      </ul>
+      {/* categories accordions */}
+
+      {categories.map((category) => (
+        <RestaurantCategory
+          key={category.card.card.title}
+          data={category?.card?.card}
+        />
+      ))}
     </div>
   );
 };
