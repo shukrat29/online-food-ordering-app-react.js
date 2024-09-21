@@ -3,9 +3,10 @@ import useOnlineStatus from "../utils/useOnlineStatus";
 // import RestaurantsInBangalore from "./RestaurantsInBangalore";
 
 // import { resList } from "../utils/mockData";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import UserContext from "../utils/UserContext";
 
 const Body = () => {
   // state variable
@@ -45,6 +46,8 @@ const Body = () => {
   const onlineStatus = useOnlineStatus();
   if (onlineStatus == false)
     return <h1>Please check your internet connection</h1>;
+
+  const { loggedInUser, setUserName } = useContext(UserContext);
 
   // Conditional Rendering
   return listOfRestaurants.length == 0 ? (
@@ -92,6 +95,14 @@ const Body = () => {
             Top Rated Restaurants (&gt;4.5 stars)
           </h3>
         </button>
+        <div>
+          <label>UserName:</label>
+          <input
+            className="border border-black p-1"
+            value={loggedInUser}
+            onChange={(e) => setUserName(e.target.value)}
+          />
+        </div>
       </div>
 
       {/* Restaurants container */}

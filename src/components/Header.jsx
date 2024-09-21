@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
-import { FaRegCircle } from "react-icons/fa";
+import UserContext from "../utils/UserContext";
 
 const Header = () => {
   const [btnName, setBtnName] = useState("Login");
 
   const onlineStatus = useOnlineStatus();
+
+  const { loggedInUser } = useContext(UserContext);
 
   return (
     <div className="header sticky top-0 z-50 bg-white shadow-md">
@@ -39,6 +41,7 @@ const Header = () => {
           <li>
             <Link to="/cart">Cart</Link>
           </li>
+
           <button
             className="login"
             onClick={() => {
@@ -47,6 +50,7 @@ const Header = () => {
           >
             {btnName}
           </button>
+          <li className="font-bold">{loggedInUser}</li>
           <li>
             Online Status:
             {onlineStatus ? "Online" : "Offline"}

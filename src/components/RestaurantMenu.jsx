@@ -4,6 +4,7 @@ import { FaChevronDown } from "react-icons/fa6";
 import { useParams } from "react-router-dom";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 import RestaurantCategory from "./RestaurantCategory";
+import { useState } from "react";
 
 const RestaurantMenu = () => {
   // const [resInfo, setResInfo] = useState(null);
@@ -16,6 +17,7 @@ const RestaurantMenu = () => {
   // Custom Hooks
   const resInfo = useRestaurantMenu(resId);
 
+  // below code is replaced by making  custom hooks
   // useEffect(() => {
   //   fetchMenu();
   // }, []);
@@ -32,16 +34,13 @@ const RestaurantMenu = () => {
   //   setResInfo(json.data);
   // };
 
+  const [showIndex, setShowIndex] = useState(null);
+
   if (resInfo == null) return <Shimmer />;
 
   const { name, cuisines, costForTwoMessage } =
     resInfo?.cards[2]?.card?.card?.info;
 
-  // title- Recommended
-  const { itemCards } =
-    resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card;
-  console.log(resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards);
-  // Categories
   const categories =
     resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.filter(
       (c) =>
@@ -58,10 +57,13 @@ const RestaurantMenu = () => {
 
       {/* categories accordions */}
 
-      {categories.map((category) => (
+      {categories.map((category, index) => (
+        // controlled component, controll by Parent RestaurantMenu
         <RestaurantCategory
           key={category.card.card.title}
           data={category?.card?.card}
+          showItems={index == showIndex ? true : false}
+          setShowIndex={() => setShowIndex(index)}
         />
       ))}
     </div>
