@@ -2,6 +2,8 @@ import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext";
+import { useSelector } from "react-redux";
+import { PiShoppingCartSimple } from "react-icons/pi";
 
 const Header = () => {
   const [btnName, setBtnName] = useState("Login");
@@ -9,6 +11,10 @@ const Header = () => {
   const onlineStatus = useOnlineStatus();
 
   const { loggedInUser } = useContext(UserContext);
+
+  // Selector to update cart quantity
+  // subscribing to the store using a selector
+  const cartItems = useSelector((store) => store.cart.items);
 
   return (
     <div className="header sticky top-0 z-50 bg-white shadow-md">
@@ -39,7 +45,12 @@ const Header = () => {
             <Link to="/grocery">Grocery</Link>
           </li>
           <li>
-            <Link to="/cart">Cart</Link>
+            <Link
+              to="/cart"
+              className="font-semibold flex items-center text-red-600"
+            >
+              <PiShoppingCartSimple />({cartItems.length})
+            </Link>
           </li>
 
           <button

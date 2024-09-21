@@ -12,6 +12,8 @@ import RestaurantMenu from "./components/RestaurantMenu";
 import { lazy, Suspense, useEffect } from "react";
 import UserContext from "./utils/UserContext";
 import { useState } from "react";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
 
 const Grocery = lazy(() => import("./components/Grocery"));
 
@@ -26,30 +28,32 @@ function App() {
     setUserName(data.name);
   }, []);
   return (
-    <div className="app flex flex-col min-h-screen">
-      <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
-        <Header />
-        <main className="flex-1">
-          <Routes>
-            <Route path="/" element={<Body />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route
-              path="/grocery"
-              element={
-                <Suspense fallback={<h1>Loading...</h1>}>
-                  <Grocery />
-                </Suspense>
-              }
-            />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/restaurants/:resId" element={<RestaurantMenu />} />
-            <Route path="*" element={<Error />} />
-          </Routes>
-        </main>
-        <Footer />
-      </UserContext.Provider>
-    </div>
+    <Provider store={appStore}>
+      <div className="app flex flex-col min-h-screen">
+        <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
+          <Header />
+          <main className="flex-1">
+            <Routes>
+              <Route path="/" element={<Body />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route
+                path="/grocery"
+                element={
+                  <Suspense fallback={<h1>Loading...</h1>}>
+                    <Grocery />
+                  </Suspense>
+                }
+              />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/restaurants/:resId" element={<RestaurantMenu />} />
+              <Route path="*" element={<Error />} />
+            </Routes>
+          </main>
+          <Footer />
+        </UserContext.Provider>
+      </div>
+    </Provider>
   );
 }
 
