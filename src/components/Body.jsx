@@ -1,15 +1,12 @@
 import RestaurantCard, { RestaurantCardWithVegLabel } from "./RestaurantCard";
-import useOnlineStatus from "../utils/useOnlineStatus";
-// import RestaurantsInBangalore from "./RestaurantsInBangalore";
+import useOnlineStatus from "../customHooks/useOnlineStatus";
 
-// import { resList } from "../utils/mockData";
 import { useEffect, useState, useContext } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import UserContext from "../utils/UserContext";
 
 const Body = () => {
-  // state variable
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);
   const [searchText, setSearchText] = useState("");
@@ -17,22 +14,16 @@ const Body = () => {
   const UpdatedRestaurantCardWithVegLabel =
     RestaurantCardWithVegLabel(RestaurantCard);
 
-  // console.log(listOfRestaurants);
-  // console.log(filteredRestaurant);
-
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async () => {
-    // Fetching data from swiggy from title= Top restaurant chains in Bangalore
     const data = await fetch(
       "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.960059122809971&lng=77.57337538383284&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
     console.log(json);
-
-    // Optional Chaining
 
     setListOfRestaurants(
       json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants
@@ -49,13 +40,11 @@ const Body = () => {
 
   const { loggedInUser, setUserName } = useContext(UserContext);
 
-  // Conditional Rendering
   return listOfRestaurants.length == 0 ? (
     <Shimmer />
   ) : (
     <>
       <div className="filter">
-        {/* Search Restaurant by typing text(name) */}
         <div className="search">
           <input
             type="text"
@@ -123,10 +112,6 @@ const Body = () => {
           </Link>
         ))}
       </div>
-      {/* <h1 className="font-bold mt-4 mb-1 size-3">
-        Restaurants with online food delivery in Bangalore
-      </h1>
-      <RestaurantsInBangalore /> */}
     </>
   );
 };

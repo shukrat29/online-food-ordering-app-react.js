@@ -2,8 +2,6 @@ import "./App.css";
 import Body from "./components/Body";
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
-import { About } from "./components/About";
-import { Contact } from "./components/Contact";
 import Cart from "./components/Cart";
 import Footer from "./components/Footer";
 import Error from "./components/Error";
@@ -35,8 +33,7 @@ function App() {
           <main className="flex-1">
             <Routes>
               <Route path="/" element={<Body />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
+
               <Route
                 path="/grocery"
                 element={

@@ -1,19 +1,14 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
-import useOnlineStatus from "../utils/useOnlineStatus";
+import useOnlineStatus from "../customHooks/useOnlineStatus";
 import UserContext from "../utils/UserContext";
 import { useSelector } from "react-redux";
 import { PiShoppingCartSimple } from "react-icons/pi";
 
 const Header = () => {
-  const [btnName, setBtnName] = useState("Login");
-
   const onlineStatus = useOnlineStatus();
-
   const { loggedInUser } = useContext(UserContext);
 
-  // Selector to update cart quantity
-  // subscribing to the store using a selector
   const cartItems = useSelector((store) => store.cart.items);
 
   return (
@@ -27,7 +22,7 @@ const Header = () => {
           />
         </Link>
         <Link to="/">
-          <h1>FoodBazaar</h1>
+          <h1>OnlineFoodOrder</h1>
         </Link>
       </div>
       <div className="nav-items">
@@ -38,9 +33,7 @@ const Header = () => {
           <li>
             <Link to="/about">About Us</Link>
           </li>
-          <li>
-            <Link to="/contact">Contact Us</Link>
-          </li>
+
           <li>
             <Link to="/grocery">Grocery</Link>
           </li>
@@ -52,15 +45,6 @@ const Header = () => {
               <PiShoppingCartSimple />({cartItems.length})
             </Link>
           </li>
-
-          <button
-            className="login"
-            onClick={() => {
-              btnName == "Login" ? setBtnName("Logout") : setBtnName("Login");
-            }}
-          >
-            {btnName}
-          </button>
           <li className="font-bold">{loggedInUser}</li>
           <li>
             Online Status:

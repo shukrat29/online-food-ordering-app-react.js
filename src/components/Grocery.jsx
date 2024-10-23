@@ -5,9 +5,8 @@ const Grocery = () => {
     <div>
       <h1>Grocery page</h1>
       <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam aspernatur
-        ex id, voluptatibus perferendis nihil odio iusto similique tempore
-        ipsum.
+        Learned lazy loading concept of react during building this component
+        !!!!
       </p>
     </div>
   );
