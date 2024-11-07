@@ -1,13 +1,11 @@
-// import React, { useState } from "react";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import ItemList from "./ItemList";
 
 const RestaurantCategory = ({ data, showItems, setShowIndex }) => {
-  // const [showItems, setShowItems] = useState(false);
   const handleClick = () => {
     setShowIndex();
   };
-  // console.log(data);
+
   return (
     <div>
       {/* Accordion Header */}
@@ -25,8 +23,6 @@ const RestaurantCategory = ({ data, showItems, setShowIndex }) => {
         </div>
         {showItems && <ItemList items={data.itemCards} />}
       </div>
-
-      {/* Accordion Body */}
     </div>
   );
 };

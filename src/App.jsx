@@ -6,7 +6,6 @@ import Cart from "./components/Cart";
 import Footer from "./components/Footer";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
-// import Grocery from "./components/Grocery";
 import { lazy, Suspense, useEffect } from "react";
 import UserContext from "./utils/UserContext";
 import { useState } from "react";

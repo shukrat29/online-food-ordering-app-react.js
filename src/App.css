@@ -29,13 +29,6 @@
   display: flex;
 }
 
-/* .nav-items > ul > li {
-  padding: 10px;
-  margin: 10px;
-  font-weight: 600;
-  cursor: pointer;
-  font-size: 20px;
-} */
 .nav-items > ul > li:hover {
   color: orangered;
 }
@@ -64,12 +57,6 @@
   border: 1px solid black;
   cursor: pointer;
 }
-
-/* .res-container{
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-} */
 
 .res-logo {
   width: 100%;

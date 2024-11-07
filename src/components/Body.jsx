@@ -1,10 +1,9 @@
 import RestaurantCard, { RestaurantCardWithVegLabel } from "./RestaurantCard";
 import useOnlineStatus from "../customHooks/useOnlineStatus";
 
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
-import UserContext from "../utils/UserContext";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
@@ -38,14 +37,11 @@ const Body = () => {
   if (onlineStatus == false)
     return <h1>Please check your internet connection</h1>;
 
-  const { loggedInUser } = useContext(UserContext);
-
   return listOfRestaurants.length == 0 ? (
     <Shimmer />
   ) : (
     <div className="p-3">
       <div className="filter">
-        {/* Search input and top rated restaurants container */}
         <div className="flex flex-col items-center justify-center space-y-4 md:flex-row md:space-y-0">
           <div className="search">
             <input
@@ -58,8 +54,6 @@ const Body = () => {
             />
             <button
               onClick={() => {
-                // Filter the restaurant cards and update the UI
-                // searchText
                 const filteredRestaurantsBySearchText =
                   listOfRestaurants.filter((res) =>
                     res.info.name
@@ -73,20 +67,16 @@ const Body = () => {
             </button>
           </div>
 
-          {/* Filter Top Rated Restaurants having more than 4.5 stars */}
           <button
             className="filter-btn"
             onClick={() => {
-              //  filter logic here
               const topRatedRestaurantsList = listOfRestaurants.filter(
                 (res) => res.info.avgRating > 4.5
               );
               setFilteredRestaurant(topRatedRestaurantsList);
             }}
           >
-            <h3 className="text-lg font-semibold">
-              Top Rated Restaurants (&gt;4.5 stars)
-            </h3>
+            <h3 className="text-lg font-semibold">Top Rated Restaurants</h3>
           </button>
         </div>
       </div>
@@ -98,16 +88,10 @@ const Body = () => {
             key={restaurant.info.id}
             to={"/restaurants/" + restaurant.info.id}
           >
-            {/* if the restaurant is veg then add a veg lebel to it.
-            using higher order component feature of react */}
-
             {restaurant.info.veg ? (
               <UpdatedRestaurantCardWithVegLabel resData={restaurant} />
             ) : (
-              <RestaurantCard
-                resData={restaurant}
-                className="flex flex-col p"
-              />
+              <RestaurantCard resData={restaurant} className="" />
             )}
           </Link>
         ))}

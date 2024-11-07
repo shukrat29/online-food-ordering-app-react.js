@@ -27,9 +27,6 @@ const RestaurantCard = (props) => {
 };
 
 // Higher Order Component
-// input- RestaurantCard and return RestaurantCardWithVegLabel
-// it does not change/modify anything of Original RestaurantCard it only adds or enhance
-
 export const RestaurantCardWithVegLabel = (RestaurantCard) => {
   return (props) => {
     return (
