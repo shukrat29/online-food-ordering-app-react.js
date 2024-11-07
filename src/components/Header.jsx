@@ -1,18 +1,15 @@
-import { useContext } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../customHooks/useOnlineStatus";
-import UserContext from "../utils/UserContext";
 import { useSelector } from "react-redux";
 import { PiShoppingCartSimple } from "react-icons/pi";
 
 const Header = () => {
   const onlineStatus = useOnlineStatus();
-  const { loggedInUser } = useContext(UserContext);
 
   const cartItems = useSelector((store) => store.cart.items);
 
   return (
-    <div className="header sticky top-0 z-50 bg-white shadow-md">
+    <div className="header sticky top-0 z-50 bg-white shadow-md flex flex-col sm:flex-row">
       <div className="logo-container flex">
         <Link to="/">
           <img
@@ -25,13 +22,10 @@ const Header = () => {
           <h1>OnlineFoodOrder</h1>
         </Link>
       </div>
-      <div className="nav-items">
-        <ul>
+      <div className="nav-items ">
+        <ul className="flex pb-3 space-x-3">
           <li>
             <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/about">About Us</Link>
           </li>
 
           <li>
@@ -45,7 +39,7 @@ const Header = () => {
               <PiShoppingCartSimple />({cartItems.length})
             </Link>
           </li>
-          <li className="font-bold">{loggedInUser}</li>
+
           <li>
             Online Status:
             {onlineStatus ? "Online" : "Offline"}
