@@ -41,42 +41,28 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="p-3">
-      <div className="filter">
-        <div className="flex flex-col items-center justify-center space-y-4 md:flex-row md:space-y-0">
-          <div className="search">
-            <input
-              type="text"
-              className="search-box"
-              value={searchText}
-              onChange={(e) => {
-                setSearchText(e.target.value);
-              }}
-            />
-            <button
-              onClick={() => {
-                const filteredRestaurantsBySearchText =
-                  listOfRestaurants.filter((res) =>
-                    res.info.name
-                      .toLowerCase()
-                      .includes(searchText.toLowerCase())
-                  );
-                setFilteredRestaurant(filteredRestaurantsBySearchText);
-              }}
-            >
-              Search
-            </button>
-          </div>
-
+      <div className="flex flex-col items-start justify-start space-y-4 md:flex-row md:space-y-0">
+        <div className="search">
+          <input
+            type="text"
+            className="search-box rounded-sm p-1"
+            placeholder="Search..."
+            value={searchText}
+            onChange={(e) => {
+              setSearchText(e.target.value);
+            }}
+          />
           <button
-            className="filter-btn"
+            className="border p-1 rounded-sm items-start justify-start"
             onClick={() => {
-              const topRatedRestaurantsList = listOfRestaurants.filter(
-                (res) => res.info.avgRating > 4.5
+              const filteredRestaurantsBySearchText = listOfRestaurants.filter(
+                (res) =>
+                  res.info.name.toLowerCase().includes(searchText.toLowerCase())
               );
-              setFilteredRestaurant(topRatedRestaurantsList);
+              setFilteredRestaurant(filteredRestaurantsBySearchText);
             }}
           >
-            <h3 className="text-lg font-semibold">Top Rated Restaurants</h3>
+            Search
           </button>
         </div>
       </div>
