@@ -1,6 +1,5 @@
 import RestaurantCard, { RestaurantCardWithVegLabel } from "./RestaurantCard";
 import useOnlineStatus from "../customHooks/useOnlineStatus";
-
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
@@ -34,26 +33,23 @@ const Body = () => {
   };
 
   const onlineStatus = useOnlineStatus();
-  if (onlineStatus == false)
-    return <h1>Please check your internet connection</h1>;
+  if (!onlineStatus) return <h1>Please check your internet connection</h1>;
 
-  return listOfRestaurants.length == 0 ? (
+  return listOfRestaurants.length === 0 ? (
     <Shimmer />
   ) : (
     <div className="p-3">
-      <div className="flex flex-col items-start justify-start space-y-4 md:flex-row md:space-y-0">
-        <div className="search">
+      <div className="flex flex-col items-start space-y-4 md:flex-row md:space-y-0">
+        <div className="search flex gap-2">
           <input
             type="text"
-            className="search-box rounded-sm p-1"
+            className="search-box rounded-sm p-2 border border-gray-500"
             placeholder="Search..."
             value={searchText}
-            onChange={(e) => {
-              setSearchText(e.target.value);
-            }}
+            onChange={(e) => setSearchText(e.target.value)}
           />
           <button
-            className="border p-1 rounded-sm items-start justify-start"
+            className="border px-3 py-2 rounded-sm bg-blue-500 text-white"
             onClick={() => {
               const filteredRestaurantsBySearchText = listOfRestaurants.filter(
                 (res) =>
@@ -68,7 +64,7 @@ const Body = () => {
       </div>
 
       {/* Restaurants container */}
-      <div className="res-container flex flex-col p-3 justify-center items-center sm:flex-row flex-wrap space-y-3 sm:space-x-3">
+      <div className="res-container flex flex-wrap gap-4">
         {filteredRestaurant.map((restaurant) => (
           <Link
             key={restaurant.info.id}
@@ -77,7 +73,7 @@ const Body = () => {
             {restaurant.info.veg ? (
               <UpdatedRestaurantCardWithVegLabel resData={restaurant} />
             ) : (
-              <RestaurantCard resData={restaurant} className="" />
+              <RestaurantCard resData={restaurant} />
             )}
           </Link>
         ))}

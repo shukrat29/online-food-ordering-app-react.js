@@ -40,9 +40,13 @@ const Header = () => {
             </Link>
           </li>
 
-          <li>
-            Online Status:
-            {onlineStatus ? "Online" : "Offline"}
+          <li className="flex items-center space-x-1">
+            <span>Active:</span>
+            {onlineStatus ? (
+              <span className="text-green-500 text-xl">●</span>
+            ) : (
+              <span className="text-gray-400 text-xl">●</span>
+            )}
           </li>
         </ul>
       </div>
